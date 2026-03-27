@@ -6,10 +6,10 @@ local DataStoreService = game:GetService("DataStoreService")
 
 
 --dependencies
-local aN = require(Dependencies.NumberSystems.AlyaNum) --also Dependencies/NumberSystems/AlyaNum
+local aN = require(Dependencies.NumberSystems.AlyaNum) --Dependencies/NumberSystems/AlyaNum
 local ld = require(Dependencies.LibDeflate) --might not be nessecary
-
-local DBSConfig = require(Dependencies.Configuration)
+local DBSHelper = require(Dependencies.KitHelper) --Dependencies/KitHelper
+local DBSConfig = require(Dependencies.Configuration) --Dependencies/Configuration
 
 --DataStore and helper fucntionsd
 

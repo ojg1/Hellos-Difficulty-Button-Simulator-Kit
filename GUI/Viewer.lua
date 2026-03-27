@@ -1,8 +1,10 @@
 local aN = require(game.ReplicatedStorage.Dependencies.NumberSystems.AlyaNum)
+local DBSHelper = require(game.ReplicatedFirst.Dependencies.KitHelper)
 
 task.wait(0.5)
 local Player = game.Players:GetPlayerFromCharacter(script.Parent.Parent.Parent)
 local stat = Player:WaitForChild("KitStats")
+
 
 while task.wait(0.01) do
 	for _, v in pairs(script.Parent:GetDescendants()) do

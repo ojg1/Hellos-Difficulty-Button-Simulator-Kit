@@ -1052,7 +1052,7 @@ function AlyaNum.fromOnoe(onoeNum: {mantissa: number, exponent: number} & BaseAl
 	return fix(number)
 end
 
-function AlyaNum.fromOmega(onum: unknown): AlyaNum
+function AlyaNum.fromOmega(onum): AlyaNum
 	local number: BaseAlyaNum
 	if onum.sign ~= nil then -- probably already converted
 		number = onum :: BaseAlyaNum

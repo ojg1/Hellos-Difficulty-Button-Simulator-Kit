@@ -1,5 +1,5 @@
 
-# Welcome to H|DBS Kit V1.1
+# Welcome to H|DBS Kit V1.2
 
 ## diff:
 H|DBS Kit V1.1

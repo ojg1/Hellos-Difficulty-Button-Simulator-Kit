@@ -19,4 +19,4 @@ Move folder "ServerStorage" in HDBS Kit V1.2 into game.ServerStorage and unpack
 
 README.md and README.luau not fully wrote. 
 
-# Please write README and kit suggestions preferably in https://www.github.com/ojg1/Hello-s-Difficulty-Button-Simulator-Kit/issues.
+# Please write README and kit suggestions preferably in https://www.github.com/ojg1/Hellos-Difficulty-Button-Simulator-Kit/issues.

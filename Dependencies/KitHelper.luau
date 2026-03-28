@@ -1,8 +1,8 @@
 local Helper = {}
 
 local aN = require(game.ReplicatedStorage.Dependencies.NumberSystems.AlyaNum)
-local DDS = game:GetService("DataStoreService")
-local DBSData = DDS:GetDataStore("DBSData")
+local DSS = game:GetService("DataStoreService")
+local DBSData = DSS:GetDataStore("DBSData")
 --Datastore helpers
 
 --save data using aN lb
@@ -93,6 +93,8 @@ end
 function Helper:CorrectNan(s : string)
     if s == "nan" then
         return "0"
+    else
+        return s
     end
 end
 

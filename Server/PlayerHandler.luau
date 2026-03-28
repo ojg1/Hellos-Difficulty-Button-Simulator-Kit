@@ -15,93 +15,93 @@ local DBSConfig = require(Dependencies.Configuration) --Dependencies/Configurati
 
 local DBSData = DataStoreService:GetDataStore("DBSData")
 
-local function SaveDataLBEncode(Player : Player)
-	local DataString = ""
-	local PlayerKitStats = Player:WaitForChild("KitStats")
+-- local function SaveDataLBEncode(Player : Player)
+-- 	local DataString = ""
+-- 	local PlayerKitStats = Player:WaitForChild("KitStats")
 	
-	for _,Stat in pairs(PlayerKitStats:GetChildren()) do
-		DataString = DataString..Stat.Name..":"..tostring(aN.lbencode(aN.fromString(Stat.Value))).."|"
-	end
+-- 	for _,Stat in pairs(PlayerKitStats:GetChildren()) do
+-- 		DataString = DataString..Stat.Name..":"..tostring(aN.lbencode(aN.fromString(Stat.Value))).."|"
+-- 	end
 	
-	local Success, ErrorMessage = pcall(function()
-		DBSData:SetAsync(Player.UserId, DataString)
-	end)
+-- 	local Success, ErrorMessage = pcall(function()
+-- 		DBSData:SetAsync(Player.UserId, DataString)
+-- 	end)
 	
-	if Success then
-		return 
-	else
-		print("Failed to save data for userId:"..tostring(Player.UserId).."| userName:"..Player.Name)
-		warn(ErrorMessage)
-	end
-end
+-- 	if Success then
+-- 		return 
+-- 	else
+-- 		print("Failed to save data for userId:"..tostring(Player.UserId).."| userName:"..Player.Name)
+-- 		warn(ErrorMessage)
+-- 	end
+-- end
 
-local function SaveData(Player : Player)
-	local DataString = ""
-	local PlayerKitStats = Player:WaitForChild("KitStats")
+-- local function SaveData(Player : Player)
+-- 	local DataString = ""
+-- 	local PlayerKitStats = Player:WaitForChild("KitStats")
 	
-	for _,Stat in pairs(PlayerKitStats:GetChildren()) do
-		DataString = DataString..Stat.Name..":"..Stat.Value.."|"
-	end
+-- 	for _,Stat in pairs(PlayerKitStats:GetChildren()) do
+-- 		DataString = DataString..Stat.Name..":"..Stat.Value.."|"
+-- 	end
 	
-	local Success, ErrorMessage = pcall(function()
-		DBSData:SetAsync(Player.UserId, DataString)
-	end)
+-- 	local Success, ErrorMessage = pcall(function()
+-- 		DBSData:SetAsync(Player.UserId, DataString)
+-- 	end)
 
-	if Success then
-		return
-	else
-		print("Failed to save data for userId:"..tostring(Player.UserId).."| userName:"..Player.Name)
-		warn(ErrorMessage)
-	end
-end
+-- 	if Success then
+-- 		return
+-- 	else
+-- 		print("Failed to save data for userId:"..tostring(Player.UserId).."| userName:"..Player.Name)
+-- 		warn(ErrorMessage)
+-- 	end
+-- end
 
-local function LoadDataLBDecode(Player : Player, DataString : string)
+-- local function LoadDataLBDecode(Player : Player, DataString : string)
 
-	--redefine KitStats
-	local KitStats = Player:WaitForChild("KitStats")
-	local StatList = string.split(DataString, "|")
+-- 	--redefine KitStats
+-- 	local KitStats = Player:WaitForChild("KitStats")
+-- 	local StatList = string.split(DataString, "|")
 
-	for _, LBValue in pairs(StatList) do
-		local Divide = string.split(LBValue, ":")
-		local StatChild = KitStats:FindFirstChild(Divide[1])
+-- 	for _, LBValue in pairs(StatList) do
+-- 		local Divide = string.split(LBValue, ":")
+-- 		local StatChild = KitStats:FindFirstChild(Divide[1])
 			
-		if StatChild then
-			StatChild.Value = aN.toString(aN.lbencode(tonumber(Divide[2])))
-		end
+-- 		if StatChild then
+-- 			StatChild.Value = aN.toString(aN.lbencode(tonumber(Divide[2])))
+-- 		end
 			
-		-- KitStats:FindFirstChild(Divide[1]).Value = aN.toString(aN.lbdecode(Divide[2]))
-		--List[Divide[1]] = aN.lbdecode(Divide[2])
-	end
+-- 		-- KitStats:FindFirstChild(Divide[1]).Value = aN.toString(aN.lbdecode(Divide[2]))
+-- 		--List[Divide[1]] = aN.lbdecode(Divide[2])
+-- 	end
 
-end
+-- end
 
-local function LoadData(Player : Player, DataString : string)
+-- local function LoadData(Player : Player, DataString : string)
 	
-	--redefine KitStats
-	local KitStats = Player:WaitForChild("KitStats")
-	local StatList = string.split(DataString, "|")
+-- 	--redefine KitStats
+-- 	local KitStats = Player:WaitForChild("KitStats")
+-- 	local StatList = string.split(DataString, "|")
 
-	for _, LBValue in pairs(StatList) do
-		local Divide = string.split(LBValue, ":")
-		local StatChild = KitStats:FindFirstChild(Divide[1])
+-- 	for _, LBValue in pairs(StatList) do
+-- 		local Divide = string.split(LBValue, ":")
+-- 		local StatChild = KitStats:FindFirstChild(Divide[1])
 			
-		if StatChild then
-			StatChild.Value = aN.toString(Divide[2])
-		end
+-- 		if StatChild then
+-- 			StatChild.Value = aN.toString(Divide[2])
+-- 		end
 			
-		-- KitStats:FindFirstChild(Divide[1]).Value = aN.toString(aN.lbdecode(Divide[2]))
-		--List[Divide[1]] = aN.lbdecode(Divide[2])
-	end
-end
+-- 		-- KitStats:FindFirstChild(Divide[1]).Value = aN.toString(aN.lbdecode(Divide[2]))
+-- 		--List[Divide[1]] = aN.lbdecode(Divide[2])
+-- 	end
+-- end
 
 game:BindToClose(function()
 	if DBSConfig.UseLeaderboardEncryption then
 		for _,Player in pairs(game.Players:GetPlayers()) do
-			task.spawn(SaveDataLBEncode, Player)
+			task.spawn(DBSHelper:SaveDataLBEncode(), Player)
 		end		
 	else
 		for _,Player in pairs(game.Players:GetPlayers()) do
-			task.sapwn(SaveData, Player)
+			task.sapwn(DBSHelper:SaveData(), Player)
 		end
 	end
 
@@ -135,9 +135,9 @@ game.Players.PlayerAdded:Connect(function(Player : Player)
 
 	if Success and Data then
 		if DBSConfig.UseLeaderboardEncryption then
-			LoadDataLBDecode()
+			DBSHelper:LoadDataLBDecode()
 		else
-			LoadData()
+			DBSHelper:LoadData()
 		end
 		
 	else
@@ -157,8 +157,8 @@ end)
 
 game.Players.PlayerRemoving:Connect(function(Player)
 	if DBSConfig.UseLeaderboardEncryption then
-		SaveDataLBEncode(Player)
+		DBSHelper:SaveDataLBEncode(Player)
 	else
-		SaveData(Player)
+		DBSHelper:SaveData(Player)
 	end
 end)

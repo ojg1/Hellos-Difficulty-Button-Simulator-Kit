@@ -48,13 +48,11 @@ local function constructStat(Tag : string, CostTag : string, RetuTag : string, B
 					local addValue = aN.fromString(C.Return.Value)
 
 
-					print(Boosts)
 					for boost, value in pairs(Boosts) do
 						local KitStatValue = aN.fromString(PlayerStats[boost].Value)
 						local init = aN.mul(aN.fromString(value), KitStatValue)
 						init = aN.add(init, aN.fromString("1e0"))
-						print(boost)
-						print(value)
+
 						addValue = aN.mul(init, addValue)
 					end
 
@@ -65,8 +63,10 @@ local function constructStat(Tag : string, CostTag : string, RetuTag : string, B
 						PlayerStats[CostTag].Value = aN.toString(aN.sub(aN.fromString(PlayerStats[CostTag].Value), aN.fromString(C.Cost.Value)))		
 					end
 
+					
+					print(Attributes.Reset)
 					for _,Stat in pairs(Attributes.Reset) do
-						if Stat == "Multi" then PlayerStats["Multi"].Value = "1e0" return end
+						if Stat == "Multi" then PlayerStats["Multi"].Value = "1e0" continue end
 						PlayerStats[Stat].Value = "0e0"
 					end
 
@@ -136,3 +136,20 @@ local RebirthTable = {
 }
 
 constructStat(RebirthTable.Tag, RebirthTable.CostTag, RebirthTable.RetuTag, RebirthTable.Boosts, RebirthTable.Attributes)
+
+local UltraRebirthTable = {
+	Tag = "UltraRebirth",
+	Boosts = {
+		["Prestige"] = "2e0"
+	},
+	CostTag = "Rebirth",
+	RetuTag = "UltraRebirth",
+	Attributes = {
+		Reset = {"Money","Multi","Rebirth"},
+		SubFromCTag = false,
+		BillboardFormat = "Cost CostTag = Return RetuTag"
+	}
+}
+
+constructStat(UltraRebirthTable.Tag, UltraRebirthTable.CostTag, UltraRebirthTable.RetuTag, UltraRebirthTable.Boosts, UltraRebirthTable.Attributes)
+

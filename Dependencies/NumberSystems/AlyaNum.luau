@@ -2,7 +2,7 @@
 --!native
 
 local THRESHOLD = 16
-local DECIMAL_POINTS = 2
+local DECIMAL_POINTS = 3
 local DEFAULT_ABBREVIATION: "suffix" | "scientific" = "suffix"
 local FLOAT64_LIMIT = 1.797693015e308
 local LOG10_FLOAT64_LIMIT = math.log10(FLOAT64_LIMIT)

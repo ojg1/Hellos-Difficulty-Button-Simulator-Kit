@@ -68,7 +68,6 @@ function Helper:LoadDataLBDecode(Player : Player, DataString : string)
 
 end
 
-
 --savedata with string as is
 function Helper:LoadData(Player : Player, DataString : string)
 	
